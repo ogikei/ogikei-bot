@@ -1,24 +1,19 @@
-const Botkit = require('botkit');
-
 if (!process.env.token) {
-  console.log('Error: Specify token in environment');
-  process.exit(1);
+    console.log('Error: Specify token in environment');
+    process.exit(1);
 }
 
+const Botkit = require('./lib/Botkit.js');
+const os = require('os');
+
 const controller = Botkit.slackbot({
-    debug: false
+    debug: true,
 });
 
-controller.spawn({
+const bot = controller.spawn({
     token: process.env.token
-}).startRTM(function(err){
-    if (err) {
-        throw new Error(err);
-    }
-});
+}).startRTM();
 
-// say hi
-controller.hears('hi',['direct_message','direct_mention','mention'],function(bot,message) {
-    bot.reply(message,'hi');
+controller.hears('', ['direct_mention'], function(bot, message) {
+    bot.reply(message, 'hahaha');
 });
-
