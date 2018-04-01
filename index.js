@@ -3,7 +3,7 @@ if (!process.env.token) {
     process.exit(1);
 }
 
-const Botkit = require('./lib/Botkit.js');
+const Botkit = require('botkit');
 const os = require('os');
 
 const controller = Botkit.slackbot({
@@ -14,6 +14,6 @@ const bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
-controller.hears('', ['direct_mention'], function(bot, message) {
-    bot.reply(message, 'hahaha');
+controller.hears('test', ['direct_mention'], function(bot, message) {
+    bot.reply(message, 'yahhoo');
 });
